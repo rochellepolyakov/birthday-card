@@ -519,10 +519,11 @@ body {
   .card-animal--guinea-pig { bottom: 192px; left: 6px; }
   .card-animal--seal { bottom: 142px; right: 6px; }
 }
-/* "from Rochelle" signature bottom right */
+
+/* "from Rochelle" signature bottom right (above waves so it's visible) */
 .from-rochelle {
   position: absolute;
-  bottom: 20px;
+  bottom: 152px;
   right: 20px;
   margin: 0;
   font-size: 0.9rem;
@@ -530,8 +531,7 @@ body {
   font-style: italic;
   color: var(--ink);
   letter-spacing: 0.02em;
-  z-index: 3;
+  z-index: 5;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
-  pointer-events: none;
-}
+
 
