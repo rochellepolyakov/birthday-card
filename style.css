@@ -1,0 +1,521 @@
+/* ===== Pastel Japanese Birthday Card ===== */
+:root {
+  --pastel-cream: #FFF8F0;
+  --pastel-pink: #FFE4EC;
+  --pastel-sakura: #FFB7C5;
+  --pastel-mint: #B5EAD7;
+  --pastel-lavender: #E2D5F1;
+  --pastel-blue: #A8D8EA;
+  --pastel-ocean: #C5E3F6;
+  --pastel-ocean-deep: #9BC4E2;
+  --pastel-gold: #FFEAA7;
+  --ink: #5D4E6D;
+  --ink-soft: #7D6E8D;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+  background: linear-gradient(165deg, var(--pastel-lavender) 0%, var(--pastel-pink) 40%, var(--pastel-cream) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.page {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* ----- Card container ----- */
+.card {
+  position: relative;
+  background: var(--pastel-cream);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 20px rgba(93, 78, 109, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  padding-bottom: 140px; /* space for waves */
+}
+
+/* ----- Card animals (deer, fox, guinea pig, seal) ----- */
+.card-animal {
+  position: absolute;
+  z-index: 2;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.card-animal svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 6px rgba(93, 78, 109, 0.12));
+}
+
+.card-animal--deer {
+  top: 58px;
+  left: 6px;
+  width: 44px;
+  height: 44px;
+}
+
+.card-animal--fox {
+  top: 58px;
+  right: 6px;
+  width: 44px;
+  height: 44px;
+}
+
+.card-animal--guinea-pig {
+  bottom: 198px;
+  left: 10px;
+  width: 48px;
+  height: 48px;
+}
+
+.card-animal--seal {
+  bottom: 148px;
+  right: 10px;
+  width: 46px;
+  height: 46px;
+}
+
+/* ----- Japanese seigaiha (wave) border ----- */
+.japan-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 140px;
+  background-image: radial-gradient(
+      circle at 50% 50%,
+      var(--pastel-sakura) 0%,
+      transparent 8%
+    ),
+    radial-gradient(
+      circle at 30% 30%,
+      var(--pastel-sakura) 0%,
+      transparent 6%
+    ),
+    radial-gradient(
+      circle at 70% 70%,
+      var(--pastel-sakura) 0%,
+      transparent 6%
+    );
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px, 0 0;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ----- Cherry blossoms along edges ----- */
+.blossom-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.blossom-row--top {
+  top: 8px;
+}
+
+.blossom-row--bottom {
+  bottom: 148px; /* above waves */
+  height: 44px;
+}
+
+.blossom-side {
+  position: absolute;
+  top: 60px;
+  bottom: 188px;
+  width: 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.blossom-side--left {
+  left: 4px;
+}
+
+.blossom-side--right {
+  right: 4px;
+}
+
+.blossom {
+  flex-shrink: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.blossom:hover {
+  transform: scale(1.15) rotate(5deg);
+  filter: brightness(1.1);
+}
+
+.blossom.bloom {
+  animation: blossom-bloom 0.6s ease;
+}
+
+@keyframes blossom-bloom {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+.blossom svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.blossom--s {
+  width: 28px;
+  height: 28px;
+}
+
+.blossom--m {
+  width: 36px;
+  height: 36px;
+}
+
+.blossom--l {
+  width: 44px;
+  height: 44px;
+}
+
+/* ----- Inner content ----- */
+.inner {
+  position: relative;
+  z-index: 1;
+  padding: 56px 24px 24px;
+  color: var(--ink);
+}
+
+.title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  margin: 0 0 1rem;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.message {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0 0 1.5rem;
+}
+
+/* ----- Interactive octopus ----- */
+.octo-area {
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.octo-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.octo {
+  display: inline-block;
+  position: relative;
+  transition: transform 0.25s ease;
+}
+
+.octo-btn:hover .octo {
+  transform: scale(1.05);
+}
+
+.octo-head {
+  display: block;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--pastel-sakura), var(--pastel-pink));
+  box-shadow: 0 4px 12px rgba(255, 183, 197, 0.4);
+}
+
+.octo-face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+}
+
+.octo-eye {
+  position: absolute;
+  top: 38%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.octo-eye:first-of-type {
+  left: 28%;
+}
+.octo-eye:last-of-type {
+  right: 28%;
+}
+
+.octo-smile {
+  position: absolute;
+  bottom: 32%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 10px;
+  border: 2px solid var(--ink);
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+}
+
+.octo-tentacles .t {
+  position: absolute;
+  bottom: -8px;
+  width: 8px;
+  height: 20px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--pastel-sakura), var(--pastel-pink));
+  transform-origin: center top;
+}
+.octo-tentacles .t:nth-child(1) { left: 8px;  transform: rotate(-30deg); }
+.octo-tentacles .t:nth-child(2) { left: 18px; transform: rotate(-15deg); }
+.octo-tentacles .t:nth-child(3) { left: 28px; transform: rotate(0deg); }
+.octo-tentacles .t:nth-child(4) { left: 38px; transform: rotate(15deg); }
+.octo-tentacles .t:nth-child(5) { right: 38px; left: auto; transform: rotate(-15deg); }
+.octo-tentacles .t:nth-child(6) { right: 28px; left: auto; transform: rotate(0deg); }
+.octo-tentacles .t:nth-child(7) { right: 18px; left: auto; transform: rotate(15deg); }
+.octo-tentacles .t:nth-child(8) { right: 8px;  left: auto; transform: rotate(30deg); }
+
+.love-reveal {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.love-reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ----- Ocean waves (bottom) ----- */
+.waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.waves svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.wave {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  fill: none;
+  stroke-width: 0;
+}
+
+.w1 {
+  fill: var(--pastel-ocean);
+  animation: wave 4s ease-in-out infinite;
+}
+
+.w2 {
+  fill: var(--pastel-ocean-deep);
+  opacity: 0.85;
+  animation: wave 5s ease-in-out infinite 0.5s;
+}
+
+.w3 {
+  fill: var(--pastel-blue);
+  opacity: 0.7;
+  animation: wave 6s ease-in-out infinite 1s;
+}
+
+@keyframes wave {
+  0%, 100% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(-2%) scaleY(1.02); }
+}
+
+/* ----- Russian "I love you" between photos ----- */
+.russian-love {
+  position: absolute;
+  bottom: 168px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  z-index: 3;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+}
+
+/* ----- Polaroids ----- */
+.polaroid {
+  position: absolute;
+  bottom: 160px;
+  margin: 0;
+  padding: 8px 8px 28px;
+  background: var(--pastel-cream);
+  box-shadow: 0 4px 16px rgba(93, 78, 109, 0.15);
+  border-radius: 2px;
+  transform: rotate(-3deg);
+  z-index: 2;
+}
+
+.polaroid-left {
+  left: 16px;
+}
+
+.polaroid-right {
+  right: 16px;
+  transform: rotate(3deg);
+}
+
+.polaroid-img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 1px;
+}
+
+/* Hide duplicate photo row if present */
+.photo-row {
+  display: none;
+}
+
+/* ----- Floating hot air balloon ----- */
+.balloon-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.balloon-btn {
+  position: absolute;
+  pointer-events: auto;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 58px;
+  height: 72px;
+  animation: balloon-float 18s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+
+.balloon-btn:hover {
+  transform: scale(1.1);
+}
+
+.balloon-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(93, 78, 109, 0.2));
+}
+
+.balloon-reveal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  padding: 1rem 1.5rem;
+  background: var(--pastel-cream);
+  color: var(--ink);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(93, 78, 109, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 11;
+  max-width: 90%;
+}
+
+.balloon-reveal.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes balloon-float {
+  0%, 100% { left: 12%; top: 18%; }
+  15% { left: 22%; top: 12%; }
+  30% { left: 18%; top: 28%; }
+  45% { left: 8%; top: 22%; }
+  60% { left: 25%; top: 20%; }
+  75% { left: 15%; top: 15%; }
+  90% { left: 20%; top: 25%; }
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 420px) {
+  .inner {
+    padding: 52px 16px 20px;
+  }
+  .blossom-side {
+    width: 36px;
+  }
+  .blossom--l { width: 36px; height: 36px; }
+  .blossom--m { width: 30px; height: 30px; }
+  .blossom--s { width: 22px; height: 22px; }
+  .card-animal--deer,
+  .card-animal--fox { width: 36px; height: 36px; }
+  .card-animal--guinea-pig,
+  .card-animal--seal { width: 38px; height: 38px; }
+  .card-animal--guinea-pig { bottom: 192px; left: 6px; }
+  .card-animal--seal { bottom: 142px; right: 6px; }
+}
