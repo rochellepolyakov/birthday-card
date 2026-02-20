@@ -383,7 +383,7 @@ body {
 /* ----- Russian "I love you" between photos ----- */
 .russian-love {
   position: absolute;
-  bottom: 168px;
+  bottom: calc(168px- 1cm);
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
@@ -519,3 +519,4 @@ body {
   .card-animal--guinea-pig { bottom: 192px; left: 6px; }
   .card-animal--seal { bottom: 142px; right: 6px; }
 }
+
